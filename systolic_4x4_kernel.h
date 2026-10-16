@@ -12,10 +12,7 @@ typedef ap_uint<512> wide_t;          // one full AXI beat
 constexpr int E_PER_W   = 512 / 16;   // 32 int16 per beat
 constexpr int WORDS_ROW = KMAX / E_PER_W;   // 4 beats per padded A row
 
-// Memory layout (host must match):
-//   A : M_TILE rows, each padded to KMAX int16  -> M_TILE*WORDS_ROW beats
-//   B : KMAX * N_TILE int16, contiguous         -> KMAX*N_TILE/E_PER_W beats
-//   C : M_TILE * N_TILE int32                   -> 1 beat
+
 extern "C" void systolic_kernel(
     const wide_t* A,
     const wide_t* B,
