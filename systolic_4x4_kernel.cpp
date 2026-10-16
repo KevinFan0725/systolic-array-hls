@@ -126,7 +126,6 @@ extern "C" void systolic_kernel(
 
     const int words_b = (K * N_TILE + E_PER_W - 1) / E_PER_W;   // beats for all of B
 
-    // ---- A: HBM -> BRAM in ONE burst ----
     // Reading row by row costs a fresh AXI transaction per row (~64 cycles of
     // latency each). A is padded to M_TILE*KMAX, so the whole tile is one
     // contiguous run of beats: issue it as a single burst and pay that latency
@@ -144,7 +143,6 @@ extern "C" void systolic_kernel(
         }
     }
 
-    // ---- B: HBM -> BRAM. Each beat holds 8 consecutive k rows of 4. ----
     for (int w = 0; w < words_b; w++) {
 #pragma HLS LOOP_TRIPCOUNT min=1 max=16 avg=16
 #pragma HLS PIPELINE II=1
@@ -158,7 +156,7 @@ extern "C" void systolic_kernel(
 
     systolic_core(A_local, B_local, C_local, K);
 
-    // ---- C: the whole 4x4 tile is 16 int32 = exactly one beat ----
+
     wide_t out = 0;
     for (int i = 0; i < M_TILE; i++) {
         for (int j = 0; j < N_TILE; j++) {
