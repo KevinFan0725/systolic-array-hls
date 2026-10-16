@@ -1,7 +1,5 @@
 #!/bin/bash
-# Run on yangzi (requires USC VPN):
-#   scp -r Matrix_multi_kernel jiakang@10.136.200.74:~/
-#   ssh jiakang@10.136.200.74 'cd ~/Matrix_multi_kernel && bash run_csynth.sh'
+# Run on yangzi (requires USC VPN)
 set -e
 
 source /tools/Xilinx/Vivado/2022.2/settings64.sh
