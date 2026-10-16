@@ -1,6 +1,4 @@
 // C-simulation / co-simulation testbench for the wide-port kernel.
-// Buffers are declared as wide_t beats and filled through an int16 view,
-// which is exactly what the XRT host does.
 #include "systolic_4x4_kernel.h"
 #include <cstdio>
 #include <cstring>
