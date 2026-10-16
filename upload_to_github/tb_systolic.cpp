@@ -21,12 +21,11 @@ static int run_case(int K, const char* label) {
     Cbuf[0] = 0;
 
     int Aref[M_TILE][KMAX], Bref[KMAX][N_TILE];
-    // Asymmetric data: a wrong skew or a dead PE cannot pass by accident.
     for (int i = 0; i < M_TILE; i++)
         for (int k = 0; k < K; k++) {
             int v = (i * 7 + k * 3) % 11 - 5;
             Aref[i][k] = v;
-            poke(Abuf, i * KMAX + k, v);        // row stride is the padded KMAX
+            poke(Abuf, i * KMAX + k, v);       
         }
     for (int k = 0; k < K; k++)
         for (int j = 0; j < N_TILE; j++) {
@@ -57,7 +56,7 @@ int main() {
     bad += run_case(4,   "min");
     bad += run_case(16,  "mid");
     bad += run_case(32,  "aln");
-    bad += run_case(100, "odd");   // not a multiple of 32: exercises the tail beat
+    bad += run_case(100, "odd"); 
     bad += run_case(128, "max");
     printf("%s\n", bad ? "CSIM FAIL" : "CSIM PASS");
     return bad ? 1 : 0;
