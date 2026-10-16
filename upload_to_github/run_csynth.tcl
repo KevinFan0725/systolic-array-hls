@@ -1,6 +1,5 @@
 # C-simulation + C-synthesis for the 4x4 systolic array.
 #   usage:  vitis_hls -f run_csynth.tcl
-#   override: SYN_PART=xcu55c-fsvh2892-2L-e SYN_PERIOD=3.0 vitis_hls -f run_csynth.tcl
 
 set part   [expr {[info exists ::env(SYN_PART)]   ? $::env(SYN_PART)   : "xcu280-fsvh2892-2L-e"}]
 set period [expr {[info exists ::env(SYN_PERIOD)] ? $::env(SYN_PERIOD) : "3.33"}]
