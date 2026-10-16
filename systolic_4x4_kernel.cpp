@@ -1,20 +1,5 @@
 #include "systolic_4x4_kernel.h"
 
-// ---------------------------------------------------------------------------
-// Output-stationary 4x4 systolic array.
-//
-// Each PE(i,j) holds one accumulator for C[i][j] and never moves it.
-// A flows left-to-right, B flows top-to-bottom, one hop per cycle.
-//
-// Operands are skewed on injection so that the two values meeting at PE(i,j)
-// in cycle t always carry the same k index:
-//
-//   a_in[i] = A[i][t-i]   takes j cycles to reach column j  ->  k = t-i-j
-//   b_in[j] = B[t-j][j]   takes i cycles to reach row i     ->  k = t-i-j
-//
-// The loop runs K + M_TILE + N_TILE - 2 cycles: on the last one (t = K+5) the
-// far corner PE(3,3) sees k = K-1, i.e. the array drains exactly.
-// ---------------------------------------------------------------------------
 void systolic_core(
     data_t A_local[M_TILE][KMAX],
     data_t B_local[KMAX][N_TILE],
