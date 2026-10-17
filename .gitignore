@@ -1,0 +1,12 @@
+csynth_*/
+*.log
+*.jou
+.Xil/
+vitis_hls.log
+*.xo
+*.xclbin
+*.ltx
+_x/
+.run/
+.ipcache/
+host
